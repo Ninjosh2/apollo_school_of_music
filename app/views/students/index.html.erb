@@ -1,1 +1,7 @@
-<h1>Hello!!</h1>
+<h1>Scheduled Students</h1>
+<% @students.each do |student| %>
+    <li>
+        <%= link_to student.name, student_path(student) %> 
+    </li>
+    <br>
+<% end %>
