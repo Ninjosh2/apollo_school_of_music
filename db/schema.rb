@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_190242) do
+ActiveRecord::Schema.define(version: 2020_11_10_190947) do
+
+  create_table "lessons", force: :cascade do |t|
+    t.integer "teacher_id", null: false
+    t.integer "student_id", null: false
+    t.string "location"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["student_id"], name: "index_lessons_on_student_id"
+    t.index ["teacher_id"], name: "index_lessons_on_teacher_id"
+  end
 
   create_table "students", force: :cascade do |t|
     t.string "name"
@@ -44,5 +56,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_190242) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "lessons", "students"
+  add_foreign_key "lessons", "teachers"
   add_foreign_key "students", "users"
 end
