@@ -1,0 +1,8 @@
+<h1>The Teachers</h1>
+<button><%= link_to 'Add Teacher', new_teacher_path %></button><br><br>
+<% @teachers.each do |teacher| %>
+    <li>
+        <%= link_to teacher.name, teacher_path(teacher) %> 
+    </li>
+    <br>
+<% end %>

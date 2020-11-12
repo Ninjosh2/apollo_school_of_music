@@ -2,31 +2,24 @@ class TeachersController < ApplicationController
     before_action :authenticate_user!
     before_action :set_teacher, only: [:show, :edit, :update, :destroy]
     def index
-        @teachers = Teachers.all
+        @teachers = Teacher.all
     end
     
     def show
-        set_teacher
-    end
-    
-    def new
-    
-    end
-    
-    def create
         
     end
     
-    def edit
-    
+    def new
+        @teacher = Teacher.new
     end
     
-    def update
-    
-    end
-    
-    def destroy
-    
+    def create
+        @teacher = Teacher.new(teacher_params)
+        if @teacher.save
+            redirect_to teacher_path(@teacher)
+        else
+            render :new
+        end
     end
 
     private
