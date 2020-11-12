@@ -1,4 +1,5 @@
 <h1>Scheduled Students</h1>
+<button><%= link_to 'Add Student', new_student_path %></button><br><br>
 <% @students.each do |student| %>
     <li>
         <%= link_to student.name, student_path(student) %> 

@@ -1,0 +1,13 @@
+<h1><%= @student.name %></h1><br>
+
+<h3><%= @student.phone_number %></h3>
+<h3><%= @student.instrument %></h3>
+
+<p><%= link_to 'Edit Account', edit_student_path(@student) %>
+    
+<%= form_tag(student_path(@student), method: :delete) do %>
+    <%= submit_tag "Delete Account" %>
+<% end %>
+</p>
+
+

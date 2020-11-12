@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
     def not_found
-      flash[:error] = "This student does not exist!!"
+      flash[:error] = "Account Deleted!"
       redirect_to root_path
     end
   

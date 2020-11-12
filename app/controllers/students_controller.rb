@@ -7,15 +7,20 @@ class StudentsController < ApplicationController
     end
 
     def show
-        @student = current_user.students.find(params[:id])
+        set_student
     end
 
     def new
-
+        @student = Student.new
     end
 
     def create
-
+        @student = current_user.students.build(student_params)
+        if @student.save
+            redirect_to student_path(@student)
+        else
+            render :new
+        end
     end
 
     def edit
@@ -23,10 +28,25 @@ class StudentsController < ApplicationController
     end
 
     def update
-
+        if @student.update(student_params)
+            redirect_to student_path(@student)
+        else
+            render :edit
+        end
     end
 
     def destroy
+        @student.destroy
+        redirect_to student_path
+    end
 
+    private
+
+    def set_student
+        @student = current_user.students.find(params[:id])
+    end
+
+    def student_params
+        params.require(:student).permit(:name, :phone_number, :instrument)
     end
 end
