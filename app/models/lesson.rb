@@ -50,4 +50,8 @@ class Lesson < ApplicationRecord
   def student_name
     self.student.name
   end
+
+  def self.by_teacher(teacher)
+    where(teacher_id: teacher.id)
+  end
 end

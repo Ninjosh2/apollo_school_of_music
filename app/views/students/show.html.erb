@@ -1,7 +1,7 @@
-
 <h1><%= @student.name %></h1>
 <h3><%= @student.phone_number %></h3>
-<h3><%= @student.instrument %></h3>
+<h3><%= @student.instrument %></h3><br>
+<%= link_to "#{@student.name}'s Scheduled Lessons", student_lessons_path(@student) %>
 
 <p><%= link_to 'Edit Account', edit_student_path(@student) %>
     

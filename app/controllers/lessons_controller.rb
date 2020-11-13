@@ -3,14 +3,22 @@ class LessonsController < ApplicationController
     before_action :set_lesson, only: [:show, :edit, :update, :destroy]
 
     def index
-        @lessons = current_user.lessons
+        @student = current_user.students.find_by_id(params[:student_id])
+        @teacher = Teacher.find_by_id(params[:teacher_id])
+        if @student
+            @lessons = @student.lessons
+        elsif @teacher
+            @lessons = current_user.lessons.by_teacher(@teacher)
+        else
+            @lessons = current_user.lessons
+        end
     end
 
     def show
         
     end
 
-    def new
+    def new 
         @lesson = Lesson.new
     end
 
