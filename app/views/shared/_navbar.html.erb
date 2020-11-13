@@ -1,6 +1,7 @@
 <nav>
     <%= link_to "Students", students_path %>
     <%= link_to "Teachers", teachers_path %>
+    <%= link_to "Lessons", lessons_path %>
     <% if user_signed_in? %>
       <%= form_tag(destroy_user_session_path, method: :delete, style: 'display: inline-block;') do %>
         <%= submit_tag "Sign Out" %>

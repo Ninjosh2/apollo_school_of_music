@@ -1,0 +1,27 @@
+<%= show_errors_for(lesson) %>
+<%= form_for lesson do |f| %>
+    <p>
+        <%= f.label :student_id, 'Student' %>
+        <%= f.collection_select :student_id, current_user.students, :id, :name%>
+    </p>
+    <p>
+        <%= f.label :teacher_id, 'Teacher' %>
+        <%= f.collection_select :teacher_id, Teacher.all, :id, :name %>
+    </p>
+    <p>
+        <%= f.label :location, 'Location' %>
+        <%= f.text_field :location %>
+    </p>
+
+    <p>
+        <%= f.label :start_time %>
+        <%= f.datetime_field :start_time %>
+    </p>
+
+    <p>
+        <%= f.label :end_time %>
+        <%= f.datetime_field :end_time %>
+    </p>
+
+    <%= f.submit %>
+<% end %>

@@ -1,0 +1,8 @@
+<h1>Lessons!</h1>
+<button><%= link_to 'Set up a lesson with one of our award winning teachers', new_lesson_path %> </button>
+
+<% @lessons.each do |lesson| %>
+    <p>
+        <%= link_to lesson.student_name, student_path(lesson.student) %> <%= link_to lesson.start_time.strftime('%A, %d %b %Y %l:%M %p'), lesson_path(lesson) %> with <%= link_to lesson.teacher_name, teacher_path(lesson.teacher) %>
+    </p>
+<% end %>

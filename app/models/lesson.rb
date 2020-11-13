@@ -3,7 +3,8 @@ class Lesson < ApplicationRecord
   belongs_to :student
 
   validates :start_time, :end_time, :location, presence: true
-  validate :teacher_dbl_booked, :student_dbl_booked, :ends_after_it_starts
+  validate :teacher_dbl_booked, :student_dbl_booked, if: :starts_before_it_ends?
+  validate :ends_after_it_starts
 
 
   def teacher_dbl_booked
@@ -33,8 +34,20 @@ class Lesson < ApplicationRecord
   end
 
   def ends_after_it_starts
-    if start_time > end_time
+    if !starts_before_it_ends?
       errors.add(:start_time, 'must be before end time')
     end
+  end
+
+  def starts_before_it_ends?
+    start_time < end_time
+  end
+
+  def teacher_name
+    self.teacher.name
+  end
+
+  def student_name
+    self.student.name
   end
 end

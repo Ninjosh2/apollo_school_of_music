@@ -1,0 +1,11 @@
+<h1>Lesson Breakdown</h1>
+<p>Student: <%= link_to @lesson.student_name, student_path(@lesson.student) %></p>
+<p>Teacher: <%= link_to @lesson.teacher_name, teacher_path(@lesson.teacher) %></p>
+<p>Location: <%= @lesson.location %></p>
+<p>Start Time: <%= @lesson.start_time.strftime('%A, %d %b %Y %l:%M %p')  %></p>
+<p>End Time: <%= @lesson.end_time.strftime('%A, %d %b %Y %l:%M %p') %></p>
+
+<%= link_to "Edit Lesson", edit_lesson_path(@lesson) %>
+<%= form_tag(lesson_path(@lesson), method: :delete, style: 'display: inline-block;') do %>
+    <% submit_tag "Delete Lesson" %>
+<% end %>
