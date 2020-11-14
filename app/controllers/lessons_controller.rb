@@ -12,14 +12,23 @@ class LessonsController < ApplicationController
         else
             @lessons = current_user.lessons
         end
+        filter_options
     end
 
     def show
         
     end
 
-    def new 
-        @lesson = Lesson.new
+    def new
+        @student = current_user.students.find_by_id(params[:student_id])
+        @teacher = Teacher.find_by_id(params[:teacher_id])
+        if @student
+            @lesson = @student.lessons.build
+        elsif @teacher
+            @lesson = @teacher.lessons.build
+        else
+            @lesson = Lesson.new
+        end
     end
 
     def create
@@ -53,6 +62,19 @@ class LessonsController < ApplicationController
 
     def set_lesson
         @lesson = current_user.lessons.find(params[:id])
+    end
+
+    def filter_options
+        if params[:filter_by_time] == "upcoming"
+            @lessons = @lessons.upcoming
+        elsif params[:filter_by_time] == "past"
+            @lessons = @lessons.past
+        end
+        if params[:sort] == "most_recent"
+            @lessons = @lessons.most_recent
+        elsif params[:sort] == "longest_ago"
+            @lessons = @lessons.longest_ago
+        end
     end
 
     def lesson_params

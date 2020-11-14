@@ -1,5 +1,20 @@
 <h1>Lessons!</h1>
-<button><%= link_to 'Set up a lesson', new_lesson_path %> </button>
+<button><%= link_to 'Set up a lesson', new_lesson_path %></button><br><br>
+<%= form_tag(lessons_path, method: 'get') do %>
+    <label for="filter_by_time">Filter By Time : </label>
+    <select name="filter_by_time">
+        <option <%= 'selected' if params[:filter_by_time] == '' %> value="">All</option>
+        <option <%= 'selected' if params[:filter_by_time] == 'Past' %> value="past">Past</option>
+        <option <%= 'selected' if params[:filter_by_time] == 'Upcoming' %> value="upcoming">Upcoming</option>
+    </select>
+    <label for="sort">Sort by : </label>
+    <select name="sort">
+        <option <%= 'selected' if params[:sort] == '' %> value="">None</option>
+        <option <%= 'selected' if params[:sort] == 'Most Recent' %> value="most_recent">Most Recent</option>
+        <option <%= 'selected' if params[:sort] == 'Oldest' %> value="longest_ago">Oldest</option>
+    </select>&nbsp
+    <%= submit_tag 'Submit' %>
+<% end %>
 
 <% @lessons.each do |lesson| %>
     <p>

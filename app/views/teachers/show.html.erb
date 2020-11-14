@@ -4,3 +4,4 @@
 <h3><%= @teacher.instrument %></h3>
 
 <p><%= link_to "#{@teacher.name}'s Lessons", teacher_lessons_path(@teacher) %></p>
+<p><%= link_to "Schedule a lesson with #{@teacher.name}", new_teacher_lesson_path(@teacher) %> </p>
