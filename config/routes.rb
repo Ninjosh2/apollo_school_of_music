@@ -7,6 +7,6 @@ Rails.application.routes.draw do
     resources :teachers, only: [:index]
     resources :lessons, only: [:index, :new]
   end
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth' }
   root 'students#index'
 end
