@@ -1,43 +1,91 @@
 # README
+.env file
+  GOOGLE_OAUTH_CLIENT_ID=
+  GOOGLE_OAUTH_CLIENT_SECRET=
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+gems
+  gem 'dotenv-rails', '~> 2.7'
+  gem 'omniauth'
+  gem 'omniauth-google-oauth2'
 
-Things you may want to cover:
 
-* Ruby version
+oauth controller app/controllers/users/omniauth_callbacks_controller.rb
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-<!-- ActiveRecord::Schema.define(version: 2020_11_09_235929) do
-
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "name"
-    t.string "phone_number"
-    t.string "instrument"
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+      def google_oauth2
+        user = User.from_google(from_google_params)
+        
+        if user.present?
+          sign_out_all_scopes
+          flash[:success] = t 'devise.omniauth_callbacks.success', kind: 'Google'
+          sign_in_and_redirect user, event: :authentication
+        else
+          flash[:alert] = t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized."
+          redirect_to new_user_session_path
+        end
+      end
+    
+      protected
+    
+      def after_omniauth_failure_path_for(_scope)
+        new_user_session_path
+      end
+    
+      def after_sign_in_path_for(resource_or_scope)
+        stored_location_for(resource_or_scope) || root_path
+      end
+    
+      private
+    
+      def from_google_params
+        @from_google_params ||= {
+          uid: auth.uid,
+          email: auth.info.email,
+          full_name: auth.info.name,
+          avatar_url: auth.info.image
+        }
+      end
+    
+      def auth
+        @auth ||= request.env['omniauth.auth']
+      end
   end
 
-end -->
+User model
+  class User < ApplicationRecord
+    has_many :students
+    has_many :teachers, through: :students
+    has_many :lessons, through: :students
+    # Include default devise modules. Others available are:
+    # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+    devise :database_authenticatable, :registerable,
+          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth_2]
+
+    # def self.from_google(uid:, email:, full_name:, avatar_url:)
+    #   if user = User.find_by(email: email)
+    #     user.update(uid: uid, full_name: full_name, avatar_url: avatar_url) unless user.uid.present?
+    #     user
+    #   else
+    #     User.create(
+    #       email: email,
+    #       uid: uid,
+    #       full_name: full_name,
+    #       avatar_url: avatar_url,
+    #       password: SecureRandom.hex
+    #     )
+    #   end
+    # end
+    <!-- def self.from_google(uid:, email:, full_name:, avatar_url:)
+      user = User.find_or_create_by(email: email) do |u|
+        u.uid = uid
+        u.full_name = full_name
+        u.avatar_url = avatar_url
+        u.password = SecureRandom.hex
+      end
+        user.update(uid: uid, full_name: full_name, avatar_url: avatar_url)
+        user
+    end -->
+  end
+
+
+
