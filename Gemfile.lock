@@ -214,7 +214,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   devise (~> 4.7)
-  dotenv-rails (~> 2.7)
+  dotenv-rails
   jbuilder (~> 2.7)
   listen (~> 3.2)
   omniauth
