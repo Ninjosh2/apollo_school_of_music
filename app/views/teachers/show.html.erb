@@ -1,32 +1,16 @@
-<table class="table table-striped table-bordered table-hover">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Phone Number</th>
-        <th scope="col">Main Instrument</th>
-      </tr>
-    </thead>
+<div class="jumbotron">
 
-    <tbody>
-            <tr>
-                <td><h3><%= @teacher.name %></h3></td>
-                <td><h3><%= @teacher.email %></h3></td>
-                <td><h3><%= @teacher.phone_number %></h3></td>
-                <td><h3><%= @teacher.instrument %></h3></td><br>
-            </tr> 
-    </tbody>
-</table>
+  <h1 class="display-4"><%= @teacher.name %></h1>
+  <p class="lead">Email : <%= @teacher.email %>&nbsp;&nbsp;|&nbsp;&nbsp;Phone Number : <%= @teacher.phone_number %>&nbsp;&nbsp;|&nbsp;&nbsp;Main Instument : <%= @teacher.instrument %></p>
+  <hr class="my-4">
+  <p>
+    <p><%= link_to "#{@teacher.name}'s Lessons", teacher_lessons_path(@teacher) %></p>
+    <p><%= link_to "Schedule a lesson with #{@teacher.name}", new_teacher_lesson_path(@teacher) %></p>
+  </p>
 
-<p><%= link_to "#{@teacher.name}'s Lessons", teacher_lessons_path(@teacher) %></p>
-<p><%= link_to "Schedule a lesson with #{@teacher.name}", new_teacher_lesson_path(@teacher) %> </p>
-
-<p><%= link_to 'Edit Account', edit_teacher_path(@teacher), class:"btn btn-secondary" %>
+  <p><%= link_to 'Edit Account', edit_teacher_path(@teacher), class:"btn btn-secondary" %>
     <%= form_tag(teacher_path(@teacher), method: :delete) do %>
         <%= submit_tag "Delete Account", class:"btn btn-secondary" %>
     <% end %>
-</p>
-
-<!-- 
-<p><%= link_to "#{@teacher.name}'s Lessons", teacher_lessons_path(@teacher) %></p>
-<p><%= link_to "Schedule a lesson with #{@teacher.name}", new_teacher_lesson_path(@teacher) %> </p> -->
+  </p>
+</div>

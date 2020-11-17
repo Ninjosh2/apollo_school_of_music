@@ -1,28 +1,16 @@
-<table class="table table-striped table-bordered table-hover">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Phone Number</th>
-        <th scope="col">Instrument</th>
-      </tr>
-    </thead>
+<div class="jumbotron">
 
-    <tbody>
-            <tr>
-                <td><h3><%= @student.name %></h3></td>
-                <td><h3><%= @student.phone_number %></h3></td>
-                <td><h3><%= @student.instrument %></h3></td><br>
-            </tr> 
-    </tbody>
-</table>
+  <h1 class="display-4"><%= @student.name %></h1>
+  <p class="lead">Phone Number : <%= @student.phone_number %>&nbsp;&nbsp;|&nbsp;&nbsp;Instrument : <%= @student.instrument %></p>
+  <hr class="my-4">
+  <p>
+    <%= link_to "#{@student.name}'s Scheduled Lessons", student_lessons_path(@student) %><br><br>
+    <%= link_to "Schedule a lesson for #{@student.name}", new_student_lesson_path(@student) %><br><br>
+  </p>
 
-<%= link_to "#{@student.name}'s Scheduled Lessons", student_lessons_path(@student) %> <br><br>
-<%= link_to "Schedule a lesson for #{@student.name}", new_student_lesson_path(@student) %><br><br>
-
-<p><%= link_to 'Edit Account', edit_student_path(@student), class:"btn btn-secondary" %>
+  <p><%= link_to 'Edit Account', edit_student_path(@student), class:"btn btn-secondary" %>
     <%= form_tag(student_path(@student), method: :delete) do %>
         <%= submit_tag "Delete Account", class:"btn btn-secondary" %>
     <% end %>
-</p>
-
-
+  </p>
+</div>
