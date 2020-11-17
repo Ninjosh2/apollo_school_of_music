@@ -1,8 +1,22 @@
-<h1>Scheduled Students</h1>
-<button><%= link_to 'Add Student', new_student_path %></button><br><br>
-<% @students.each do |student| %>
-    <li>
-        <%= link_to student.name, student_path(student) %> 
-    </li>
-    <br>
-<% end %>
+<button type="button" class="btn btn-outline-info"><%= link_to 'Add Student', new_student_path %></button><br><br>
+
+
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Instrument</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <% @students.each do |student| %>
+            <tr>
+                <td><%= link_to student.name, student_path(student) %></td>
+                <td><%= student.phone_number %></td>
+                <td><%= student.instrument %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

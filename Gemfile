@@ -48,8 +48,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "devise", "~> 4.7"
 
+
 gem 'omniauth'
-gem 'omniauth-github'
-gem 'activerecord-session_store'
-
-
+gem 'omniauth-google-oauth2'

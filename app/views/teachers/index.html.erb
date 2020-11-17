@@ -1,8 +1,23 @@
-<h1>The Teachers</h1>
-<button><%= link_to 'Add Teacher', new_teacher_path %></button><br><br>
-<% @teachers.each do |teacher| %>
-    <li>
-        <%= link_to teacher.name, teacher_path(teacher) %> 
-    </li>
-    <br>
-<% end %>
+<button type="button" class="btn btn-outline-info"><%= link_to 'Add Teacher', new_teacher_path %></button><br><br>
+
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Main Instrument</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <% @teachers.each do |teacher| %>
+            <tr>
+                <td><%= link_to teacher.name, teacher_path(teacher) %></td>
+                <td><%= teacher.email %></td>
+                <td><%= teacher.phone_number %></td>
+                <td><%= teacher.instrument %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
