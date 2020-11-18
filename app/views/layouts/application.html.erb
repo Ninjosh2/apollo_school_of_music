@@ -17,16 +17,13 @@
     <%= javascript_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+    <%= render partial: 'shared/navbar' %>
     <div class="container">
-      <%= render partial: 'shared/navbar' %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
       <% flash.each do |name, msg| -%>
         <%= content_tag :div, msg, class: name %>
       <% end -%>
     </div>
     <div class="container">
-
       <%= yield %>
     </div>  
     <!-- Optional JavaScript; choose one of the two! -->
