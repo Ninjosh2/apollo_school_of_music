@@ -32,4 +32,4 @@ This project is licensed under the MIT License - check the LICENSE.txt file
 
 # Acknowledgments
 
-Everyone at Flatiron School for the awesome support! Thank you so much!
+Everyone I have met through Flatiron School for the awesome support! Thank you so much!
