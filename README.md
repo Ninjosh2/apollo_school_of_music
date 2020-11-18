@@ -21,10 +21,10 @@ To get the Rails server running locally:
 
 - Devise - Setting up authentication for when users sign up / log in.
 
-- Omniauth - One click sign in through Github
+- Omniauth - One click sign in through Google.
 
 # Video Walkthrough
-Click here to watch my video about the project : 
+Click here to watch my video about the project : https://youtu.be/-wDn2F_YfKI
 
 # License
 
