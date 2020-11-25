@@ -2,7 +2,7 @@
 <%= form_for lesson do |f| %>
     <p>
         <%= f.label :student_id, 'Student' %>
-        <%= f.collection_select :student_id, current_user.students, :id, :name%>
+        <%= f.collection_select :student_id, current_user.students, :id, :name %>
     </p>
     <p>
         <%= f.label :teacher_id, 'Teacher' %>

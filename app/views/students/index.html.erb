@@ -3,21 +3,21 @@
 
 <table class="table table-striped table-bordered table-hover">
   
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Phone Number</th>
-        <th scope="col">Instrument</th>
-      </tr>
-    </thead>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Instrument</th>
+    </tr>
+  </thead>
 
-    <tbody>
-        <% @students.each do |student| %>
-            <tr>
-                <td><%= link_to student.name, student_path(student) %></td>
-                <td><%= student.phone_number %></td>
-                <td><%= student.instrument %></td>
-            </tr>
-        <% end %>
-    </tbody>
+  <tbody>
+    <% @students.each do |student| %>
+        <tr>
+          <td><%= link_to student.name, student_path(student) %></td>
+          <td><%= student.phone_number %></td>
+          <td><%= student.instrument %></td>
+        </tr>
+    <% end %>
+  </tbody>
 </table>
