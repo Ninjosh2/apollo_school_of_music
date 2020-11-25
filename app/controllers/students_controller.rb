@@ -10,6 +10,10 @@ class StudentsController < ApplicationController
         set_student
     end
 
+    def sort
+        @students = Student.order('name ASC')
+    end
+
     def new
         @student = Student.new
     end

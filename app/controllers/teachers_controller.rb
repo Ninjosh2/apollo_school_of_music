@@ -7,6 +7,10 @@ class TeachersController < ApplicationController
     
     def show
     end
+
+    def sort
+        @teachers = Teacher.order('name ASC')
+    end
     
     def new
         @teacher = Teacher.new
